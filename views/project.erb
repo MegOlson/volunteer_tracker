@@ -1,4 +1,7 @@
-<h1><%= @project.title %></h1>
+<div class="jumbotron">
+  <center><h2><%= @project.title %></h2></center>
+</div>
+
 
 <% if @project.volunteers.any?() %>
   <h3>Here are all the volunteers in this project:</h3>
@@ -21,9 +24,11 @@
   <input id="volunteer_name" name="volunteer_name" type="text">
   <button type="submit" class="btn">Add New Volunteer</button>
 </form>
-
+<br>
+<br>
+<button type="button" class="btn" name="button"><a href="/projects/<%= @project.id %>/edit">Edit Project</a></button>
+<br>
+<br>
 <div class="container">
   <a href="/"><button class="btn">Home</button></a>
 </div>
-
-<button type="button" class="btn" name="button"><a href="/projects/<%= @project.id %>/edit">Edit Project</a></button>

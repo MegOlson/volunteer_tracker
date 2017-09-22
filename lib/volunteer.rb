@@ -28,7 +28,8 @@ class Volunteer
   end
 
   def save
-    DB.exec("INSERT INTO volunteers (name, project_id) VALUES ('#{@name}', #{@project_id}) RETURNING id;")
+    results = DB.exec("INSERT INTO volunteers (name, project_id) VALUES ('#{@name}', #{@project_id}) RETURNING id;")
+    @id = results.first["id"].to_i
   end
 
   def ==(another_volunteer)
@@ -48,9 +49,8 @@ class Volunteer
 
   def update(attributes)
     @name = attributes.fetch(:name)
-    @project_id = attributes.fetch(:project_id).to_i
-    @id = self.id()
-    DB.exec("UPDATE volunteers SET name = '#{@name}', project_id = '#{@project_id}' WHERE id = #{:id};")
+    @project_id = attributes.fetch(:project_id)
+    DB.exec("UPDATE volunteers SET name = '#{@name}', project_id = #{@project_id} WHERE id = #{:id};")
   end
 
   def delete

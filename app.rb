@@ -59,9 +59,9 @@ get('/volunteers/:id') do
   erb(:volunteer)
 end
 
-patch('/volunteers/:id/edit') do
+patch ('/volunteers/:id/edit') do
   volunteer = Volunteer.find(params[:id].to_i)
-  volunteer.update({name: params["name"], project_id: params["project-id"].to_i})
+  volunteer.update({name: params["name"]})
   redirect "/projects/#{volunteer.project_id}"
 end
 
