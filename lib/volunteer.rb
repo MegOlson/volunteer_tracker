@@ -1,7 +1,8 @@
 class Volunteer
-  attr_reader(:name, :project_id)
+  attr_reader(:id, :name, :project_id)
 
   def initialize(attributes)
+    @id = attributes.fetch(:id) || nil
     @name = attributes.fetch(:name)
     @project_id = attributes.fetch(:project_id)
   end
@@ -12,13 +13,14 @@ class Volunteer
     returned_volunteers.each do |volunteer|
       name = volunteer.fetch("name")
       project_id = volunteer.fetch("project_id").to_i
-      volunteers.push(Volunteer.new({:name => name, :project_id => project_id}))
+      id = volunteer.fetch("id").to_i
+      volunteers.push(Volunteer.new({:name => name, :project_id => project_id, :id => id}))
     end
     volunteers
   end
 
   def save
-    DB.exec("INSERT INTO volunteers (name, project_id) VALUES ('#{@name}', #{@project_id});")
+    DB.exec("INSERT INTO volunteers (name, project_id) VALUES ('#{@name}', #{@project_id}) RETURNING id;")
   end
 
   def ==(another_volunteer)
@@ -26,13 +28,13 @@ class Volunteer
   end
 
   def self.find(id)
-   found_volunteer = nil
-   Volunteer.all().each() do |volunteer|
-     if volunteer.id().==(id)
-       found_volunteer = volunteer
-     end
-   end
-   found_volunteer
+    results = DB.exec("SELECT * FROM volunteers WHERE id = #{:id};")
+    if results.any?
+      return Volunteer.new({
+        id: results.first["id"].to_i,
+        name: results.first["name"],
+        project_id: results.first["project_id"].to_i
+      })
+    end
   end
-
 end
