@@ -11,10 +11,10 @@ get('/') do
   erb(:index)
 end
 
-# get('/projects') do
-#   @projects = Project.all()
-#   erb(:projects)
-# end
+get('/projects') do
+  @projects = Project.all()
+  erb(:projects)
+end
 #
 # get('/projects/new') do
 #   erb(:doctor_form)
