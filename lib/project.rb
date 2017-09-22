@@ -3,7 +3,7 @@ class Project
 
   def initialize(attributes)
     @title = attributes.fetch(:title)
-    @id = attributes.fetch(:id)
+    @id = attributes.fetch(:id) || nil
   end
 
   def title
@@ -40,17 +40,17 @@ class Project
     @id = result.first.fetch("id").to_i
   end
 
-
-  # def volunteers
-  #   volunteers = []
-  #   volunteers = DB.exec("SELECT * FROM volunteers WHERE id = #{self.id()};")
-  #   volunteers.each() do |volunteer|
-  #     name = task.fetch("name")
-  #     project_id = task.fetch("project_id").to_i()
-  #     volunteers.push(Volunteer.new({:name => name, :project_id => id}))
-  #   end
-  #   volunteers
-  # end
+  def volunteers
+    volunteers = []
+    results = DB.exec("SELECT * FROM volunteers WHERE project_id = #{self.id};")
+    results.each do |result|
+      name = result.fetch("name")
+      project_id = result.fetch("project_id").to_i
+      id = result.fetch("id").to_i
+      volunteers.push(Volunteer.new({:name => name, :project_id => project_id, :id => id}))
+    end
+    volunteers
+  end
 
   def ==(another_project)
     self.title == another_project.title && self.id == another_project.id
