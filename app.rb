@@ -20,22 +20,27 @@ post('/') do
   erb(:index)
 end
 
-# post('/patients') do
-#   patient_name = params.fetch("patient_name")
-#   birthday = params.fetch("birthday")
-#   project_id = params.fetch("project_id").to_i
-#   @project = Doctor.find(project_id)
-#   @patient = Patient.new({:name => patient_name, :birthday => birthday, :project_id => project_id})
-#   @patient.save()
-#   erb(:success)
-# end
-#
-# get ('/specialities') do
-#   @specialities = Speciality.all()
-#   erb(:specialities)
-# end
-#
-# post ('/specialities/:id') do
-#   @specialities = Speciality.find(params.fetch("id").to_i())
-#   erb(:speciality)
-# end
+get('/projects/:id') do
+  @project = Project.find(params.fetch("id").to_i())
+  @volunteers = Volunteer.all()
+  erb(:project)
+end
+
+post('/projects/:id') do
+  project_id = params.fetch("project_id").to_i
+  volunteer_name = params.fetch("volunteer_name")
+  volunteer = Volunteer.new({:name => volunteer_name, :project_id => project_id, :id => nil})
+  volunteer.save()
+  redirect '/'
+end
+
+get('/projects/:id/edit') do
+  @project = Project.find(params.fetch("id").to_i())
+  erb(:edit)
+end
+
+patch('/projects/:id/edit') do
+  project = Project.find(params.fetch("id").to_i())
+  project.update({title: params["title"]})
+  # redirect "/projects/#{project.id}"
+end
