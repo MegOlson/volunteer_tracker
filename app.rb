@@ -35,7 +35,7 @@ post('/projects/:id') do
 end
 
 get('/projects/:id/edit') do
-  @section = 'projects'
+  @place = 'projects'
   @project = Project.find(params[:id].to_i)
   erb(:edit)
 end
@@ -53,7 +53,7 @@ delete('/projects/:id/delete') do
 end
 
 get('/volunteers/:id') do
-  @section = 'volunteers'
+  @place = 'volunteers'
   @volunteer = Volunteer.find(params[:id].to_i)
   @projects = Project.all
   erb(:volunteer)
