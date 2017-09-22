@@ -1,8 +1,8 @@
 # _Volunteer Tracker_
 
-#### _Epicodus Independant Project, Ruby week 3 9/22/17
+#### _Epicodus Independent Ruby Project, 9/22/17
 
-#### By _**Megan Olson**_
+#### By _Megan Olson_
 
 ## Description
 

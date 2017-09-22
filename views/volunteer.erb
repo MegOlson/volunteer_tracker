@@ -1,5 +1,6 @@
-<h1>Edit Volunteer</h1>
-
+<div class="jumbotron">
+  <h1>Edit Volunteer</h1>
+</div>
 <form action="/volunteers/<%= @volunteer.id %>/edit" method="post">
   <input type="hidden" name="_method" value="patch">
   <div class="form-group">
@@ -14,4 +15,4 @@
   <button type="submit" class="btn">Delete Volunteer</button>
 </form>
 <br><br>
-<h5><a href="/">Home</a></h5>
+<button class="btn"><a href="/">Home</a></button>

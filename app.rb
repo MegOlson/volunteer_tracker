@@ -26,14 +26,6 @@ get('/projects/:id') do
   erb(:project)
 end
 
-post('/projects/:id') do
-  project_id = params.fetch("project_id").to_i
-  volunteer_name = params.fetch("volunteer_name")
-  volunteer = Volunteer.new({:name => volunteer_name, :project_id => project_id, :id => nil})
-  volunteer.save()
-  redirect '/'
-end
-
 get('/projects/:id/edit') do
   @place = 'projects'
   @project = Project.find(params[:id].to_i)
@@ -49,6 +41,14 @@ end
 delete('/projects/:id/delete') do
   project = Project.find(params[:id].to_i)
   project.delete
+  redirect '/'
+end
+
+post('/projects/:id') do
+  project_id = params.fetch("project_id").to_i
+  volunteer_name = params.fetch("volunteer_name")
+  volunteer = Volunteer.new({:name => volunteer_name, :project_id => project_id, :id => nil})
+  volunteer.save()
   redirect '/'
 end
 
