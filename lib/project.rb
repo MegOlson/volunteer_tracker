@@ -6,6 +6,10 @@ class Project
     @id = attributes.fetch(:id)
   end
 
+  def title
+    project_title = @title
+  end
+
   def self.all
     returned_projects = DB.exec("SELECT * FROM projects;")
     projects = []
