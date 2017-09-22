@@ -1,0 +1,17 @@
+<h1>Edit Volunteer</h1>
+
+<form action="/volunteers/<%= @volunteer.id %>/edit" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <div class="form-group">
+    <label for="name">Volunteer Name</label>
+    <input type="text" name="name" class="form-control" value="<%= @volunteer.name %>">
+  </div>
+  <button type="submit" class="btn">Update Volunteer</button>
+</form>
+
+<form action="/volunteers/<%= @volunteer.id %>/delete" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <button type="submit" class="btn">Delete Volunteer</button>
+</form>
+
+<h5><a href="/">Home</a></h5>

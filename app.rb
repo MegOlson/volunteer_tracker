@@ -51,3 +51,22 @@ delete('/projects/:id/delete') do
   project.delete
   redirect '/'
 end
+
+get('/volunteers/:id') do
+  @section = 'volunteers'
+  @volunteer = Volunteer.find(params[:id].to_i)
+  @projects = Project.all
+  erb(:volunteer)
+end
+
+patch('/volunteers/:id/edit') do
+  volunteer = Volunteer.find(params[:id].to_i)
+  volunteer.update({name: params["name"], project_id: params["project-id"].to_i})
+  redirect "/projects/#{volunteer.project_id}"
+end
+
+delete('/volunteers/:id/delete') do
+  volunteer = Volunteer.find(params[:id].to_i)
+  volunteer.delete
+  redirect "/projects/#{volunteer.project_id}"
+end

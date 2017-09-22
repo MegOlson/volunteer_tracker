@@ -45,4 +45,16 @@ class Volunteer
       })
     end
   end
+
+  def update(attributes)
+    @name = attributes.fetch(:name)
+    @project_id = attributes.fetch(:project_id).to_i
+    @id = self.id()
+    DB.exec("UPDATE volunteers SET name = '#{@name}', project_id = '#{@project_id}' WHERE id = #{:id};")
+  end
+
+  def delete
+   DB.exec("DELETE FROM volunteers WHERE id = #{self.id()};")
+  end
+
 end
