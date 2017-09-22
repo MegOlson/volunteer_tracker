@@ -7,11 +7,11 @@ class Project
   end
 
   def title
-    project_title = @title
+    @title
   end
 
   def id
-    id = @id
+    @id
   end
 
   def self.all
@@ -40,6 +40,7 @@ class Project
     @id = result.first.fetch("id").to_i
   end
 
+
   # def volunteers
   #   volunteers = []
   #   volunteers = DB.exec("SELECT * FROM volunteers WHERE id = #{self.id()};")
@@ -54,4 +55,11 @@ class Project
   def ==(another_project)
     self.title == another_project.title && self.id == another_project.id
   end
+
+  def update(attributes)
+    @title = attributes.fetch(:title)
+    @id = self.id()
+    DB.exec("UPDATE projects SET title = '#{@title}' WHERE id = #{@id};")
+  end
+
 end
