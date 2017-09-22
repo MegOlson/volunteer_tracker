@@ -7,6 +7,10 @@ class Volunteer
     @project_id = attributes.fetch(:project_id)
   end
 
+  def name
+    @name
+  end
+
   def self.all
     returned_volunteers = DB.exec("SELECT * FROM volunteers;")
     volunteers = []
