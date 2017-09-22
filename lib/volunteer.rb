@@ -11,6 +11,10 @@ class Volunteer
     @name
   end
 
+  def project_id
+    @project_id
+  end
+
   def self.all
     returned_volunteers = DB.exec("SELECT * FROM volunteers;")
     volunteers = []
