@@ -1,7 +1,27 @@
-<h1>Welcome to the Pacific Northwest Volunteer Base</h1>
+<h1><center>Welcome to the Pacific Northwest Volunteer Base</center></h1>
 
-<h3>Choose an option below:</h3>
+<h3><center>Add a new project:</center></h3><br>
 
-<a href="/projects"><button class="btn">View Projects</button></a> <br><br>
+<center><form action="/" method="post">
 
-<a href="/project/new"><button class="btn">Add Project</button></a>
+  <label for="project_title">Title</label>
+  <input id="project_title" name="project_title" type="text">
+
+  <button type="submit" class="btn">Add New Project</button>
+</form></center> <br>
+
+
+<% if @projects.any? %>
+  <h3>Projects:</h3>
+
+  <ul>
+    <% @projects.each() do |project| %>
+      <li><a href="/projects/<%= project.id() %>"><%= project.title() %></a></li>
+    <% end %>
+  </ul>
+
+  <% else %>
+  <div class="well">
+    <h3><center>There are no current volunteer projects.</center></h3>
+  </div>
+<% end %>
