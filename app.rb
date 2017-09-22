@@ -35,12 +35,19 @@ post('/projects/:id') do
 end
 
 get('/projects/:id/edit') do
-  @project = Project.find(params.fetch("id").to_i())
+  @section = 'projects'
+  @project = Project.find(params[:id].to_i)
   erb(:edit)
 end
 
 patch('/projects/:id/edit') do
-  project = Project.find(params.fetch("id").to_i())
+  project = Project.find(params[:id].to_i)
   project.update({title: params["title"]})
-  # redirect "/projects/#{project.id}"
+  redirect "/projects/#{project.id}"
+end
+
+delete('/projects/:id/delete') do
+  project = Project.find(params[:id].to_i)
+  project.delete
+  redirect '/'
 end
