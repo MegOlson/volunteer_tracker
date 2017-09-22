@@ -10,6 +10,10 @@ class Project
     project_title = @title
   end
 
+  def id
+    id = @id
+  end
+
   def self.all
     returned_projects = DB.exec("SELECT * FROM projects;")
     projects = []
